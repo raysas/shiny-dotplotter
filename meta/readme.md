@@ -1,0 +1,1 @@
+matrices: ftp://ftp.ncbi.nih.gov/blast/matrices, https://rosalind.info/glossary/dnafull/
