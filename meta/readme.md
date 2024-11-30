@@ -37,10 +37,20 @@ Any error within substitution matrix will set seqtype to protein and matrix to b
 
 ## algorithm  
 
-First thing would be to initialize a matrix of rownames = seq1 and colnames = seq2, and fill it with zeros. Normally, we invert the rows, to make it in a way the 1st seq starts from bottom up and the 2nd from left to right.  
+First thing would be to initialize a matrix of rownames = seq1 and colnames = seq2, and fill it with zeros. Normally, we invert the rows, to make it in a way the 1st seq starts from bottom up and the 2nd from left to right (consider putting seq 1 horizontally instead).  
 Then after than would need to fill it follwoing the dotplot algorithm:  
 - iterate over the sequences, and for each window of size w, we would calculate the score of the window, no thresholding will be applied here.
 - regoing over the matrix, we would apply the thresholding, and if the score is above the threshold, we would mark with the score (initially we would only mark it with a dot, but here we care about producing a continuous color map in the final visualization, so we would mark it with the score to allow for that)  
 - after that generating the plot out of the matrix. For interactive plots, plotly will be used - particularly to get a heatmap with hover information
+
+## visualization
+
+Using plotly for interactive visualization, figured that the best way is to do actually a scatter plot, because the heatmap is going to miss a lot of datapoints due to some errors in plotly rendering when theres a lot of data points (it worked for seaborn and matplotlib but not plotly, couldn't figure out why or ho to fix it)  
+So to do the scatter plot, we would need to sequeeze the matrix into a list of tuples, where each tuple is (x, y, score) - so coordinates - and filter out null values. Then we would plot these points, coloring tehm using continuous color map to give it a heatmap look and focus on score matching regions.  
+The plot would be interactive, with hover information showing the score of the point.  
+
+Now comes a step to polish the plot, background, theme, colors, labels. Here the importance of saving up teh seq type in a variable, we would use the seq id of each fasta as an axis labels and then add the seq type to the title. For scaling the width and length, this will be relative to the length/width ratio because we dont want to distort the plot ( we want to keep it orthonormal): so starting from length = len(seq1) and width = len(seq2) (not sure about order).  
+To fix sizes, define a ratio, based on a specified width or length (better user input), lets say of size s pixels, we wanna have lets say new_width=s, so we do ratio: new_width/width.  And now compute new_width=width * ratio and new_length =length * ratio.
+
 
 ## shiny app  

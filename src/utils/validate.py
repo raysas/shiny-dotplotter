@@ -1,0 +1,1 @@
+from gobal_vars import *
