@@ -147,7 +147,7 @@ def get_parameters_description_df(seq_type=SEQ_TYPE, window_size=WINDOW_SIZE, th
         'Value': [seq_type, window_size, threshold, score_matrix, seq1_length, seq2_length]
     }
     df = pd.DataFrame(data, columns=['Parameter', 'Value'])
-    df=df.set_index('Parameter')
+    # df=df.set_index('Parameter')
     return df
 
 

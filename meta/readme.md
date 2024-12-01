@@ -58,3 +58,6 @@ need to make a script that knits all the steps together as one function that tak
 Then we would use this function in the shiny app to generate the plot.
 
 ## shiny app  
+
+First, isntalling through pip and getting the vs code extension, we will be using shiny express. Deploying the app on shinyapps.io  
+

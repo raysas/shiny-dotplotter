@@ -1,0 +1,19 @@
+body {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+.sidebar {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+.main {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+input, select {
+    background-color: #333333;
+    color: #FFFFFF;
+}
