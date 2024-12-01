@@ -52,5 +52,9 @@ The plot would be interactive, with hover information showing the score of the p
 Now comes a step to polish the plot, background, theme, colors, labels. Here the importance of saving up teh seq type in a variable, we would use the seq id of each fasta as an axis labels and then add the seq type to the title. For scaling the width and length, this will be relative to the length/width ratio because we dont want to distort the plot ( we want to keep it orthonormal): so starting from length = len(seq1) and width = len(seq2) (not sure about order).  
 To fix sizes, define a ratio, based on a specified width or length (better user input), lets say of size s pixels, we wanna have lets say new_width=s, so we do ratio: new_width/width.  And now compute new_width=width * ratio and new_length =length * ratio (didnt do, still set to auto)
 
+## kniting
+
+need to make a script that knits all the steps together as one function that takes paramaters as input and returns the plot.  
+Then we would use this function in the shiny app to generate the plot.
 
 ## shiny app  
