@@ -5,14 +5,13 @@ from shinywidgets import render_plotly
 from shiny import reactive
 import pandas as pd
 
+# -- fixing paths -- 
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from dotplot import validation, plot_dotplot, get_parameters_description_df, workflow
 from dotplot import WINDOW_SIZE, THRESHOLD, SCORE_MATRIX, SEQ_TYPE, FASTA_1, FASTA_2
 
-# ui.tags.head(
-#         ui.tags.link(rel="stylesheet", href="styles.css")
-# )
+# -- appearance --
 ui.input_dark_mode()
 ui.tags.style(
             """
@@ -21,29 +20,11 @@ ui.tags.style(
                 color: white; /* Optional: Set text color to white for better contrast */
             }
             """
-    )
-
-# with ui.sidebar():
-#     # input file
-#     # ui.input_file("fasta_file1", "Fasta File 1")
-#     # ui.input_file("fasta_file2", "Fasta File 2")
-#     # slider
-#     ui.input_slider("window_size", "Window Size", 1, 50, 1)
-#     ui.input_slider("threshold", "Threshold", 1, 50, 1)
-#     # dropdown
-#     ui.input_select("score_matrix", "Score Matrix", ["blosum62", "pam120", "dnafull"])
-#     ui.input_select("seq_type", "Sequence Type", ["protein", "dna"])
-
-#     # -- set default values
-#     # input.fasta_file1(FASTA_1)
-#     # input.fasta_file2(FASTA_2)
-#     # input.window_size(WINDOW_SIZE)
-#     # input.threshold(THRESHOLD)
-#     # input.score_matrix(SCORE_MATRIX)
-#     # input.seq_type(SEQ_TYPE)
+)
 
 
 with ui.sidebar():
+    # -- input setup --
     ui.input_file("file1", "Input first fasta:", multiple=False)
     ui.input_file("file2", "Input second fasta:", multiple=False)
     ui.input_slider("window_size", "Window Size", min=0, max=50, value=10) 
@@ -51,6 +32,7 @@ with ui.sidebar():
     ui.input_select("score_matrix", "Score Matrix", ["blosum62", "pam120", "dnafull"])
     ui.input_select("seq_type", "Sequence Type", ["protein", "dna"])
         
+    # -- allow user to run example --
     ui.input_action_link("example_sequences", "Run Example")
     @reactive.effect
     @reactive.event(input.example_sequences)
@@ -64,10 +46,12 @@ with ui.sidebar():
         file1 = FASTA_1
         file2 = FASTA_2
 
+    # -- boolean is input is provided (has to be 2 seqs)
     def input_taken():
         return input.file1() and input.file2()
 
 
+    # -- display a message to make sure things are as expected
     @render.text
     def log():
         global window_size, threshold, score_matrix, seq_type, sub_mat, file1, file2

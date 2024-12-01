@@ -61,3 +61,12 @@ Then we would use this function in the shiny app to generate the plot.
 
 First, isntalling through pip and getting the vs code extension, we will be using shiny express. Deploying the app on shinyapps.io  
 
+So first to create an app have to have the following:  
+- app.py file  
+- requirements.txt file  
+
+The app.py file would have the following:  
+- import the necessary libraries (shiny is one of them)  
+- the ui part, which is the layout of the app, here I'm trying having a side bar to input the parameters and the main panel to show the plot  
+- the server part, which is the logic of the app, here we would call the function that generates the plot and return it to the main panel  
+
